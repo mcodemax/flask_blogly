@@ -1,6 +1,5 @@
 """Blogly application."""
 
-import re
 from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User
@@ -31,7 +30,21 @@ def show_title_get():
 
 @app.route('/users')
 def list_users():
+    """Show all users.
 
+    Make these links to view the detail page for the user.
+
+    Have a link here to the add-user form.
+    """
+    #Show all user steps:
+    #   seed the db with dummy data, done
+    #   use blah.query.all() then loop thru user list
+    #   loop through users table and display everything
+    #   use jinja to loop through and list it on html
+
+    #make these links steps:
+    #   add a link to each user to '/users/[user-id]
+    
     return render_template("userlist.html")
 #in ipython do db.session.execute('SELECt*from blah') and set to 
 # a vars and put in a list to see the data
@@ -39,6 +52,7 @@ def list_users():
 
 @app.route('/users/new')#method is get by default?
 def add_user_form():
+    """Show an add form for users"""
 
     return render_template('makeuser.html')
 
@@ -46,6 +60,16 @@ def add_user_form():
 
 @app.route('/users/new', methods=["POST"])
 def post_user():
+    """Process the add form, adding a new user and going back to /users"""
+    
+    #get user data from post request from HTML form; ref forex project for refresher
+    #user = User(name='input', first_name='see notes from above getting user data')
+            #make sure to seperate logic n stuff above
+    #then db.session.add(the above stuff)
+    #then db.session.commit()
+
+    #notes: you don't have to re add() a whole user once you commit it
+        #you only have to commit() changes; you can call upon the user later again
 
     return redirect("/users")
 

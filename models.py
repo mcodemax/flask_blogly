@@ -24,6 +24,6 @@ class User(db.Model): # usually only run this once after deployment otherwise yo
 
     last_name = db.Column(db.String(50)) #maybe null as default?
 
-    image_url = db.Column(db.String(50),
+    image_url = db.Column(db.String(5000),
                             default='https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/200px-Question_mark_%28black%29.svg.png')
                             #maybe add a default image
