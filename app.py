@@ -50,6 +50,7 @@ def list_users():
 def add_user_form():
     """Show an add form for users"""
 
+
     return render_template('makeuser.html')
 
     
@@ -66,6 +67,24 @@ def post_user():
 
     #notes: you don't have to re add() a whole user once you commit it
         #you only have to commit() changes; you can call upon the user later again
+
+    
+    first_name = request.form.get("first-name")
+    last_name = request.form.get("last-name")
+    imglink = request.form.get("imglink")
+
+    
+    if '' in [first_name]:
+        return redirect("/users/new")
+
+    if '' in [imglink]:
+        user = User(first_name=first_name, last_name=last_name)
+    else:
+        user = User(first_name=first_name, last_name=last_name, image_url=imglink)
+
+    
+    db.session.add(user)
+    db.session.commit()
 
     return redirect("/users")
 
@@ -103,6 +122,26 @@ def store_edits(user_num):
     Process the edit form, returning the user to the /users page.
     """
     user = User.query.get_or_404(user_num)
+    
+    first_name = request.form.get("first-name")
+    last_name = request.form.get("last-name")
+    imglink = request.form.get("imglink")
+
+    if len(first_name) > 50 or len(last_name) > 50 or len(imglink) > 5000:
+        redir_txt = '/users/' + str(user_num) + "/edit"
+        return redirect(redir_txt)
+
+    if '' not in [first_name]:
+        user.first_name = first_name
+
+    if '' not in [last_name]:
+        user.last_name = last_name
+
+    if '' not in [imglink]:
+        user.image_url = imglink   
+    
+    db.session.commit()
+
 
     
     return redirect('/users')
