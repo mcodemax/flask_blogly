@@ -13,7 +13,7 @@ class User(db.Model): # usually only run this once after deployment otherwise yo
     __tablename__ = "users"
 
     def __repr__(self):
-        return "<User id={self.id} first_name={self.first_name} last_name={self.last_name} image_url={self.image_url}>"
+        return f"<User id={self.id} first_name={self.first_name} last_name={self.last_name} image_url={self.image_url}>"
 
     id = db.Column(db.Integer, # int not the same as SQL Integer, the ORM translates etween python and postgreSQL
                     primary_key=True,

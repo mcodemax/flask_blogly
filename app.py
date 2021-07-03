@@ -36,16 +36,12 @@ def list_users():
 
     Have a link here to the add-user form.
     """
-    #Show all user steps:
-    #   seed the db with dummy data, done
-    #   use blah.query.all() then loop thru user list
-    #   loop through users table and display everything
-    #   use jinja to loop through and list it on html
-
-    #make these links steps:
-    #   add a link to each user to '/users/[user-id]
     
-    return render_template("userlist.html")
+    users = User.query.all()
+
+    
+    
+    return render_template("userlist.html", users=users)
 #in ipython do db.session.execute('SELECt*from blah') and set to 
 # a vars and put in a list to see the data
 
@@ -81,10 +77,10 @@ def show_question(user_num):
 
     Have a button to get to their edit page, and to delete the user.
     """
-
-
+        
+    user = User.query.get_or_404(user_num)
     
-    return render_template('details.html',user_num=user_num)
+    return render_template('details.html',user=user)
 
 
 
@@ -106,6 +102,7 @@ def store_edits(user_num):
     """
     Process the edit form, returning the user to the /users page.
     """
+    user = User.query.get_or_404(user_num)
 
     
     return redirect('/users')
@@ -119,6 +116,10 @@ def delete_user(user_num):
     """
 
     # return the user to the /users page.
+    user = User.query.get_or_404(user_num)
+
+    db.session.delete(user)
+    db.session.commit()
     
     #route not yet tested
     return redirect('/users')

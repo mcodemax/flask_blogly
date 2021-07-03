@@ -7,10 +7,13 @@
 {% block content %}
 
 <section id="users">
-    
+    {% for user in users %}
     <ul>
-        <li>user1</li>
+        <li><a href="/users/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></li>
     </ul>
+    {% endfor %}
+    
+    
 </section>
 
 {% endblock %}

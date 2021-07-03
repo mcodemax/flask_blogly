@@ -5,13 +5,23 @@
 {% block content %}
 
 <section id="user-details">
+    <h5>{{user.first_name}} {{user.last_name}}</h5>
     <div>
-        <img src="https://proofthatblog.com/wp-content/uploads/2013/06/question-mark.jpg" alt="">
+        <img src="{{user.image_url}}" alt="https://proofthatblog.com/wp-content/uploads/2013/06/question-mark.jpg"
+        width="250" height="250">
     </div>
     <div>
         <section><!-- have edit user btn and delete btn -->
-            <button>edit</button>
-            <button>del</button>
+            
+            <form method="GET" action="/users/{{user.id}}/edit">
+                <button type="submit">EDIT</button>
+            </form>
+            <form method="POST" action="/users/{{user.id}}/delete">
+                <button type="submit">DELETE</button>
+            </form>
+
+            
+            
         </section>
     </div>
     
