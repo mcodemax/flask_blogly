@@ -5,17 +5,17 @@
 {% block content %}
 
 <section id="edit-user">
-    
+    <h4>Current name: {{user.first_name}} {{user.last_name}}</h4>
     <form>
-        <label for="first-name">First Name:</label>
+        <label for="first-name">Change First Name:</label>
         <br>
         <input type="text" name="first-name" id="first-name">
         <br>
-        <label for="last-name">Last Name:</label>
+        <label for="last-name">Change Last Name:</label>
         <br>
         <input type="text" name="last-name" id="last-name">
         <br>
-        <label for="imglink">Image URL</label>
+        <label for="imglink">Change Image URL</label>
         <br>
         <input type="text" name="imglink" id="imglink">
 

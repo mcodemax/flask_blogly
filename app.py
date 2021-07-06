@@ -74,6 +74,7 @@ def post_user():
     imglink = request.form.get("imglink")
 
     
+    #seperate web interface from logic
     if '' in [first_name]:
         return redirect("/users/new")
 
@@ -113,7 +114,9 @@ def edit_user(user_num):
     """
     # https://stackoverflow.com/questions/547821/two-submit-buttons-in-one-form
 
-    return render_template('edit.html',user_num=user_num)
+    user = User.query.get(user_num)
+
+    return render_template('edit.html',user_num=user_num, user=user)
 
 
 @app.route('/users/<int:user_num>/edit', methods=["POST"])
